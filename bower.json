@@ -1,0 +1,28 @@
+{
+  "name": "snowflake",
+  "version": "0.0.0",
+  "homepage": "https://github.com/toby-griffiths/snowflake-js",
+  "authors": [
+    "Toby Griffiths <toby@cubicmushroom.co.uk>"
+  ],
+  "description": "Generates random snowflakes",
+  "main": "main.js",
+  "keywords": [
+    "art",
+    "generative",
+    "art",
+    "creative",
+    "snow",
+    "snowflakes",
+    "winter"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {}
+}
