@@ -6,5 +6,5 @@ require.config({
 });
 
 require(['snowflake'], function(Snowflake) {
-    console.log(typeof Snowflake);
+    console.log(new Snowflake());
 });
