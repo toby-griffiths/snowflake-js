@@ -1,10 +1,13 @@
 require.config({
-    paths: {
-        "snowflake": "../../../src/snowflake",
-        "math": "../../../src/math"
+    baseUrl: "../../src"
+});
+
+requirejs(['Snowflake/Branch'], function (SnowflakeBranch) {
+    for (var i=0; i < 20; i++) {
+        console.log(new SnowflakeBranch(30));
     }
 });
 
-require(['snowflake'], function(Snowflake) {
-    console.log(new Snowflake());
-});
+//requirejs(['Snowflake'], function(Snowflake) {
+//    console.log(new Snowflake());
+//});
