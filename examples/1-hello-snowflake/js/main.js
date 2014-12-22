@@ -1,6 +1,7 @@
 require.config({
     paths: {
-        "snowflake": "../../../src/snowflake"
+        "snowflake": "../../../src/snowflake",
+        "math": "../../../src/math"
     }
 });
 
