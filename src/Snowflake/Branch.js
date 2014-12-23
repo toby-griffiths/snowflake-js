@@ -7,20 +7,23 @@ define(['Math', 'Snowflake/SubBranch'], function (Math, SubBranch) {
     /**
      * Generates a random pattern for each different
      *
-     * @param {Snowflake.Branch} branch Branch object to get details from
+     * @param {int} scopeAngle   The angle that the sub-branches must fit within
+     * @param {int} branchLength The length of the branch
+     *                           This is used to calculate the available space
      *
      * @return {Snowflake.SubBranch[]} Returns an array of SubBranch objects, one for each branch of the snowflake
      */
-    function generateSubBranches(branch) {
+    function generateSubBranches(scopeAngle, branchLength) {
+
+        var subBranchCount;
+        var subBranches = [];
+        var subBranch;
 
         // Chances of sub-branch numbers
         // 1 branch: 10%
         // 2 branch: 55% (65%)
         // 3 branch: 35% (100%)
         var branchRandomiser = Math.getRandomNumber(1, 100);
-        var subBranchCount;
-        var subBranches = [];
-        var subBranch;
 
         if (branchRandomiser <= 10) {
             subBranchCount = 1;
@@ -31,7 +34,7 @@ define(['Math', 'Snowflake/SubBranch'], function (Math, SubBranch) {
         }
 
         do {
-            subBranch = new SubBranch(subBranchCount - subBranches.length, subBranches);
+            subBranch = new SubBranch(subBranchCount - subBranches.length, subBranches, scopeAngle, branchLength);
             subBranches.unshift(subBranch);
         } while (subBranches.length < subBranchCount);
 
@@ -53,8 +56,8 @@ define(['Math', 'Snowflake/SubBranch'], function (Math, SubBranch) {
     var Branch = function (scopeAngle) {
 
         this.scopeAngle = scopeAngle;
-        this.subBranches = generateSubBranches(this);
         this.length = Math.getRandomNumber(100, 150);
+        this.subBranches = generateSubBranches(this.scopeAngle, this.length);
     };
 
     return Branch;
