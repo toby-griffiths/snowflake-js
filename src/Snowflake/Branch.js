@@ -6,9 +6,12 @@ define(['Math', 'Snowflake/SubBranch'], function (Math, SubBranch) {
 
     /**
      * Generates a random pattern for each different
-     * @param {int} scopeAngle Angle available for branch
+     *
+     * @param {Snowflake.Branch} branch Branch object to get details from
+     *
+     * @return {Snowflake.SubBranch[]} Returns an array of SubBranch objects, one for each branch of the snowflake
      */
-    function generateSubBranches(scopeAngle) {
+    function generateSubBranches(branch) {
 
         // Chances of sub-branch numbers
         // 1 branch: 10%
@@ -17,6 +20,7 @@ define(['Math', 'Snowflake/SubBranch'], function (Math, SubBranch) {
         var branchRandomiser = Math.getRandomNumber(1, 100);
         var subBranchCount;
         var subBranches = [];
+        var subBranch;
 
         if (branchRandomiser <= 10) {
             subBranchCount = 1;
@@ -27,7 +31,8 @@ define(['Math', 'Snowflake/SubBranch'], function (Math, SubBranch) {
         }
 
         do {
-            subBranches.push(new SubBranch(subBranchCount - subBranches.length, subBranches));
+            subBranch = new SubBranch(subBranchCount - subBranches.length, subBranches);
+            subBranches.unshift(subBranch);
         } while (subBranches.length < subBranchCount);
 
         return subBranches;
@@ -39,16 +44,16 @@ define(['Math', 'Snowflake/SubBranch'], function (Math, SubBranch) {
      *
      * @name Snowflake.Branch
      * @class Snowflake.Branch
+     * @constructor
      *
      * @param {int} scopeAngle Degrees that the branch needs to sit within 3 degrees will be removed from each side to
      *                         leave a gap between branches
      *                         This number should already include any spacing between branches
-     * @constructor
      */
     var Branch = function (scopeAngle) {
 
         this.scopeAngle = scopeAngle;
-        this.subBranches = generateSubBranches(this.scopeAngle);
+        this.subBranches = generateSubBranches(this);
         this.length = Math.getRandomNumber(100, 150);
     };
 
