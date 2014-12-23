@@ -48,8 +48,14 @@ define(['Math', 'Snowflake/Branch'], function (Math, Branch) {
 
     /**
      * Snowflake class
+     *
      * Each time you call new Snowflake, a unique set of settings is created to build the snowflake from
+     *
+     *
+     * @name Snowflake
+     * @class Snowflake
      * @constructor
+     *
      * @todo Update to check the existence of the random pattern in the register to allow each one to be unique
      */
     var Snowflake = function () {

@@ -36,6 +36,10 @@ define(['Math', 'Snowflake/SubBranch'], function (Math, SubBranch) {
 
     /**
      * Prepares a random pattern for the branch of a snowflake
+     *
+     * @name Snowflake.Branch
+     * @class Snowflake.Branch
+     *
      * @param {int} scopeAngle Degrees that the branch needs to sit within 3 degrees will be removed from each side to
      *                         leave a gap between branches
      *                         This number should already include any spacing between branches
