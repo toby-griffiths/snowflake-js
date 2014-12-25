@@ -103,24 +103,6 @@ define(['Math', 'Snowflake/Branch'], function (Math, Branch) {
             var branchAngle = (2 * Math.PI) / this.branches.length * branchI;
             var proportionalLength = branch.length * proportion;
 
-            /**
-             * Remove this once all's working OK
-             */
-            (function () {
-                var arcEnd = {
-                    x: Math.sin((branchAngle + branch.scopeAngle) / 2) * proportionalLength,
-                    y: -Math.cos((branchAngle + branch.scopeAngle) / 2) * proportionalLength
-                };
-                c.save();
-                c.strokeStyle = '#ff0000';
-                c.beginPath();
-                c.moveTo(arcEnd.x, arcEnd.y);
-                c.lineTo(0, 0);
-                c.lineTo(-arcEnd.x, arcEnd.y);
-                c.stroke();
-                c.restore();
-            }());
-
             var branchEndCoords = {
                 x: Math.round(Math.sin(branchAngle) * proportionalLength),
                 y: Math.round(-Math.cos(branchAngle) * proportionalLength)
@@ -141,7 +123,8 @@ define(['Math', 'Snowflake/Branch'], function (Math, Branch) {
                 }
 
                 var subBranch = branch.subBranches[subBranchI];
-                var distanceFromCentre = (proportionalLength / (branch.subBranches.length + 1)) * subBranch.subBranchNumber;
+                var distanceFromCentre = proportionalLength
+                    - ((proportionalLength / (branch.subBranches.length + 1)) * subBranch.subBranchNumber);
                 var subBranchStartCoords = {
                     x: Math.sin(branchAngle) * distanceFromCentre,
                     y: -Math.cos(branchAngle) * distanceFromCentre
@@ -154,22 +137,16 @@ define(['Math', 'Snowflake/Branch'], function (Math, Branch) {
 
                 console.log('Sub-branch coords:', subBranchStartCoords, subBranchEndCoords);
 
-                //c.moveTo(subBranchStartCoords.x, subBranchStartCoords.y);
-                //c.arc(subBranchStartCoords.x, subBranchStartCoords.y, 3, 0, 180);
-                //c.fill();
-                //continue;
-                //
-                //console.log(subBranchStartCoords, subBranchEndCoords);
-
-                console.log(subBranch);
-
                 c.moveTo(subBranchStartCoords.x, subBranchStartCoords.y);
-                c.lineTo(subBranchEndCoords.x, subBranchEndCoords.y)
+                c.lineTo(subBranchEndCoords.x, subBranchEndCoords.y);
 
+                //c.fillText(
+                //    subBranch.subBranchNumber + ':' + subBranch.angle,
+                //    subBranchStartCoords.x + 10,
+                //    subBranchStartCoords.y
+                //);
             }
             c.stroke();
-
-            return;
         }
 
     }

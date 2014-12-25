@@ -7,17 +7,14 @@ define(['Math', 'Snowflake/SubBranch'], function (Math, SubBranch) {
     /**
      * Generates a random pattern for each different
      *
-     * @param {int} scopeAngle   The angle that the sub-branches must fit within
      * @param {int} branchLength The length of the branch
      *                           This is used to calculate the available space
      *
-     * @return {Snowflake.SubBranch[]} Returns an array of SubBranch objects, one for each branch of the snowflake
+     * @return {void}
      */
-    function generateSubBranches(scopeAngle, branchLength) {
+    function generateSubBranches(branchLength) {
 
-        var subBranchCount;
-        var subBranches = [];
-        var subBranch;
+        var subBranchCount, subBranch;
 
         // Chances of sub-branch numbers
         // 1 branch: 10%
@@ -33,12 +30,12 @@ define(['Math', 'Snowflake/SubBranch'], function (Math, SubBranch) {
             subBranchCount = 3;
         }
 
-        do {
-            subBranch = new SubBranch(subBranchCount - subBranches.length, subBranches, scopeAngle / 2, branchLength);
-            subBranches.unshift(subBranch);
-        } while (subBranches.length < subBranchCount);
+        this.subBranches = [];
 
-        return subBranches;
+        do {
+            subBranch = new SubBranch(this, subBranchCount - this.subBranches.length);
+            this.subBranches.unshift(subBranch);
+        } while (this.subBranches.length < subBranchCount);
     }
 
 
@@ -49,15 +46,24 @@ define(['Math', 'Snowflake/SubBranch'], function (Math, SubBranch) {
      * @class Snowflake.Branch
      * @constructor
      *
-     * @param {int} scopeAngle Degrees that the branch needs to sit within 3 degrees will be removed from each side to
-     *                         leave a gap between branches
-     *                         This number should already include any spacing between branches
+     * @property {number} scopeAngle                 Angle, in radians, available for the branch
+     * @property {int}    length                     Length of the branch
+     * @property {Snowflake.SubBranch[]} subBranches Array of sub-branch objects
+     *
+     * @param {number} scopeAngle Degrees that the branch needs to sit within 3 degrees will be removed from each side
+     *                            to leave a gap between branches
+     *                            This number should already include any spacing between branches
      */
     var Branch = function (scopeAngle) {
 
         this.scopeAngle = scopeAngle;
         this.length = Math.getRandomNumber(100, 150);
-        this.subBranches = generateSubBranches(this.scopeAngle, this.length);
+
+        generateSubBranches.call(this, this.length);
+
+        for (var i = 0; i < this.subBranches.length; i++) {
+            console.log(this.subBranches[i]);
+        }
     };
 
     return Branch;
