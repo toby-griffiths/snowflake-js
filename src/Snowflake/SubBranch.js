@@ -5,7 +5,7 @@
 define(['jquery'], function ($) {
 
     /**
-     * Generates a random angle based on the sub-branch number and the existing sub branches
+     * Generates a random angleInRadians based on the sub-branch number and the existing sub branches
      *
      * @param {int}                   subBranchNumber Which sub-branch is this
      * @param {Snowflake.SubBranch[]} subBranches     Array of existing (inner) sub-branches on the current branch
@@ -13,9 +13,9 @@ define(['jquery'], function ($) {
      * @return {int}
      */
     function getAngle(subBranchNumber, subBranches) {
-        var smallestAngle = 5;
-        var largestAngle = 80;
-        var angleRange, angle;
+        var smallestAngle = 5 * Math.PI / 180;
+        var largestAngle = 80 * Math.PI / 180;
+        var angleRange, angleInRadians;
 
         $.each(subBranches, function () {
             var subBranch = this;
@@ -25,9 +25,24 @@ define(['jquery'], function ($) {
         });
 
         angleRange = largestAngle - smallestAngle;
-        angle = Math.getRandomNumber(Math.floor(largestAngle - (angleRange / subBranchNumber)), largestAngle);
 
-        return angle;
+        return (Math.random() * angleRange) + smallestAngle;
+
+
+
+        console.log('Sub-branch min/max:',
+            largestAngle - (angleRange / subBranchNumber),
+            largestAngle
+        );
+
+        angleInRadians = Math.getRandomNumber(
+            largestAngle - (angleRange / subBranchNumber),
+            largestAngle
+        );
+
+        console.log('angleInRadians:', angleInRadians);
+
+        return angleInRadians;
     }
 
 

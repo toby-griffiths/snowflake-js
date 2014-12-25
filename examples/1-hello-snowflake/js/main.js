@@ -8,6 +8,13 @@ requirejs.config({
 });
 
 
-requirejs(['Snowflake/Branch'], function (SnowflakeBranch) {
-    console.log(new SnowflakeBranch(30));
-});
+requirejs(['Snowflake'],
+    /**
+     * Prepares and adds a snowflake to the page
+     * @param $
+     * @param Snowflake
+     */
+    function (Snowflake) {
+        new Snowflake(150, 150, document.getElementById('blizzard'));
+    }
+);

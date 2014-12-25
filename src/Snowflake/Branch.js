@@ -34,7 +34,7 @@ define(['Math', 'Snowflake/SubBranch'], function (Math, SubBranch) {
         }
 
         do {
-            subBranch = new SubBranch(subBranchCount - subBranches.length, subBranches, scopeAngle, branchLength);
+            subBranch = new SubBranch(subBranchCount - subBranches.length, subBranches, scopeAngle / 2, branchLength);
             subBranches.unshift(subBranch);
         } while (subBranches.length < subBranchCount);
 
