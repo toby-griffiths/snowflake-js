@@ -10,7 +10,7 @@ define(['jquery'], function ($) {
      * @return {int}
      */
     function getAngle() {
-        var smallestAngle = 15 * Math.PI / 180;
+        var smallestAngle = 45 * Math.PI / 180;
         var largestAngle = 80 * Math.PI / 180;
         var angleRange, angleInRadians;
 
