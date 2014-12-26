@@ -6,7 +6,7 @@
         <option name="LINE_SEPARATOR" value="&#10;" />
         <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="true" />
         <JSCodeStyleSettings>
-          <option name="ALIGN_OBJECT_PROPERTIES" value="1" />
+          <option name="ALIGN_OBJECT_PROPERTIES" value="2" />
           <option name="ALIGN_MULTILINE_VAR_DECLARATION" value="true" />
         </JSCodeStyleSettings>
         <PHPCodeStyleSettings>
