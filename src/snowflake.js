@@ -214,5 +214,12 @@ define(['Math', 'Snowflake/Branch'], function (Math, Branch) {
         this.domElement.appendChild(canvas);
     };
 
+
+    /**
+     * Pass-through method to re-draw the snowflake if parameters have been changed
+     * @type {drawSnowflake}
+     */
+    Snowflake.prototype.redraw = drawSnowflake;
+
     return Snowflake;
 });
