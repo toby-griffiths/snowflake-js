@@ -17,17 +17,17 @@ define(['Math', 'Snowflake/SubBranch'], function (Math, SubBranch) {
         var subBranchCount, subBranch;
 
         // Chances of sub-branch numbers
-        // 1 branch: 10%
-        // 2 branch: 55% (65%)
-        // 3 branch: 35% (100%)
+        // 2 branch: 55% (55%)
+        // 3 branch: 35% (90%)
+        // 4 branch: 10% (100%)
         var branchRandomiser = Math.getRandomNumber(1, 100);
 
-        if (branchRandomiser <= 10) {
-            subBranchCount = 1;
-        } else if (branchRandomiser <= 65) {
+        if (branchRandomiser <= 55) {
             subBranchCount = 2;
-        } else {
+        } else if (branchRandomiser <= 90) {
             subBranchCount = 3;
+        } else {
+            subBranchCount = 4;
         }
 
         this.subBranches = [];
