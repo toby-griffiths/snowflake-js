@@ -167,6 +167,14 @@ define(['Math', 'Snowflake/Branch'], function (Math, Branch) {
      *
      * @name Snowflake
      * @class Snowflake
+     *
+     * @property {int}               width       Width of the snowflake's canvas
+     * @property {int}               height      Height of the snowflake's canvas
+     * @property {int}               branchCount Number of branches
+     * @property {Array}             branches    Array of Snowflake.Branch objects making up the snowflake
+     * @property {HTMLCanvasElement} canvas      Canvas element the snowflake is drawn on
+     * @property {HTMLElement}       domElement  DOM element that the snowflake's canvas is placed within
+     *
      * @constructor
      *
      * @todo Update to check the existence of the random pattern in the register to allow each one to be unique
