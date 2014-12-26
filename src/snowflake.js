@@ -6,15 +6,16 @@ define(['Math', 'Snowflake/Branch'], function (Math, Branch) {
 
     /**
      * Generates the pattern for each branch
+     *
      * Uses the number of branchCount to calculate the angleInRadians between branchCount, and therefore the space available for the
      * branch
-     * @param {int} branchCount
+     *
      * @return {Array} Returns an array of pattern parameters
      */
-    function generateBranchPatterns(branchCount) {
+    function generateBranchPatterns() {
 
-        var angleInRadians = 2 * Math.PI / branchCount;
-        var patternCount = generatePatternCount(branchCount);
+        var angleInRadians = 2 * Math.PI / this.branchCount;
+        var patternCount = generatePatternCount(this.branchCount);
         var branchPatterns = [];
         var branches = [];
 
@@ -24,7 +25,7 @@ define(['Math', 'Snowflake/Branch'], function (Math, Branch) {
 
         do {
             branches.push(branchPatterns[branches.length % branchPatterns.length]);
-        } while (branches.length < branchCount);
+        } while (branches.length < this.branchCount);
 
         return branches;
     }
@@ -186,7 +187,7 @@ define(['Math', 'Snowflake/Branch'], function (Math, Branch) {
 
         // Prepare snowflake attributes
         this.branchCount = Math.getRandomNumber(5, 10);
-        this.branches = generateBranchPatterns(this.branchCount);
+        this.branches = generateBranchPatterns.call(this);
 
         // Prepare canvas
         var canvas = prepareCanvas.call(this);
