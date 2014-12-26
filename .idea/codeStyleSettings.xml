@@ -5,6 +5,10 @@
       <value>
         <option name="LINE_SEPARATOR" value="&#10;" />
         <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="true" />
+        <JSCodeStyleSettings>
+          <option name="ALIGN_OBJECT_PROPERTIES" value="1" />
+          <option name="ALIGN_MULTILINE_VAR_DECLARATION" value="true" />
+        </JSCodeStyleSettings>
         <PHPCodeStyleSettings>
           <option name="ALIGN_KEY_VALUE_PAIRS" value="true" />
           <option name="ALIGN_PHPDOC_COMMENTS" value="true" />
@@ -77,6 +81,6 @@
         </codeStyleSettings>
       </value>
     </option>
-    <option name="USE_PER_PROJECT_SETTINGS" value="true" />
+    <option name="PREFERRED_PROJECT_CODE_STYLE" value="Cubic Mushroom - Default" />
   </component>
 </project>
