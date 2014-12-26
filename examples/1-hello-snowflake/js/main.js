@@ -14,6 +14,8 @@ requirejs(['Snowflake'],
      * @param Snowflake
      */
     function (Snowflake) {
-        new Snowflake(150, 150, document.getElementById('blizzard'));
+        for (var i = 0; i < 30; i++) {
+            new Snowflake(150, 150, document.getElementById('blizzard'));
+        }
     }
 );
