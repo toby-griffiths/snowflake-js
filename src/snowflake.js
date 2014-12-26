@@ -211,7 +211,7 @@ define(['Math', 'Snowflake/Branch'], function (Math, Branch) {
 
         //Add to page
         this.domElement = domElement || document.createElement('domElement');
-        this.domElement.appendChild(canvas);
+        this.domElement.appendChild(this.canvas);
     };
 
 
