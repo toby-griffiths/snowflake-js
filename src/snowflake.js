@@ -117,7 +117,7 @@ define(['Math', 'Snowflake/Branch'], function (Math, Branch) {
 
             console.log('sub-branch count:', branch.subBranches.length);
 
-            for (subBranchI in branch.subBranches) {
+            for (var subBranchI in branch.subBranches) {
                 if (!branch.subBranches.hasOwnProperty(subBranchI)) {
                     continue;
                 }
@@ -131,14 +131,23 @@ define(['Math', 'Snowflake/Branch'], function (Math, Branch) {
                 };
                 var proportionalSubBranchLength = subBranch.length * proportion;
                 var subBranchEndCoords = {
-                    x: subBranchStartCoords.x + Math.sin(branchAngle - subBranch.angle) * proportionalSubBranchLength,
-                    y: subBranchStartCoords.y - Math.cos(branchAngle - subBranch.angle) * proportionalSubBranchLength
+                    left: {
+                        x: subBranchStartCoords.x + Math.sin(branchAngle - subBranch.angle) * proportionalSubBranchLength,
+                        y: subBranchStartCoords.y - Math.cos(branchAngle - subBranch.angle) * proportionalSubBranchLength
+                    },
+                    right: {
+                        x: subBranchStartCoords.x + Math.sin(branchAngle + subBranch.angle) * proportionalSubBranchLength,
+                        y: subBranchStartCoords.y - Math.cos(branchAngle + subBranch.angle) * proportionalSubBranchLength
+                    }
+
                 };
 
                 console.log('Sub-branch coords:', subBranchStartCoords, subBranchEndCoords);
 
                 c.moveTo(subBranchStartCoords.x, subBranchStartCoords.y);
-                c.lineTo(subBranchEndCoords.x, subBranchEndCoords.y);
+                c.lineTo(subBranchEndCoords.left.x, subBranchEndCoords.left.y);
+                c.moveTo(subBranchStartCoords.x, subBranchStartCoords.y);
+                c.lineTo(subBranchEndCoords.right.x, subBranchEndCoords.right.y);
 
                 //c.fillText(
                 //    subBranch.subBranchNumber + ':' + subBranch.angle,

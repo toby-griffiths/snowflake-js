@@ -74,7 +74,7 @@ define(['jquery'], function ($) {
         maxLengthOfSubBranch = Math.floor(perpendicularDistanceToAngleScopeBoundary
         * Math.tan(angleFromPerpendicularToSubBranch * (Math.PI / 180)));
         minLengthOfSubBranch = Math.min(minLength, Math.floor(maxLengthOfSubBranch / 3));
-        length = Math.getRandomNumber(minLengthOfSubBranch, Math.max(maxLengthOfSubBranch, maxLength));
+        length = Math.getRandomNumber(minLengthOfSubBranch, Math.min(maxLengthOfSubBranch, maxLength));
 
         return length;
     }

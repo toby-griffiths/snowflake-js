@@ -11,7 +11,6 @@ requirejs.config({
 requirejs(['Snowflake'],
     /**
      * Prepares and adds a snowflake to the page
-     * @param $
      * @param Snowflake
      */
     function (Snowflake) {
