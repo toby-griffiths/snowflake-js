@@ -14,8 +14,17 @@ requirejs(['Snowflake'],
      * @param {Snowflake} Snowflake
      */
     function (Snowflake) {
+
+        var snowflake;
+
         for (var i = 0; i < 30; i++) {
-            new Snowflake(150, 150, document.getElementById('blizzard'));
+            snowflake = new Snowflake(300, 150, document.getElementById('blizzard'));
+
+            snowflake.centre = {
+                x: 75,
+                y: 75
+            };
+            snowflake.draw();
         }
     }
 );
