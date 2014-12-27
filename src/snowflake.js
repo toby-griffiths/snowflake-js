@@ -137,6 +137,7 @@ define(['Math', 'Snowflake/Branch'], function (Math, Branch) {
         this.domElement.appendChild(this.canvas);
     };
 
+
     /**
      * Draws the actual snowflake on the canvas
      */
