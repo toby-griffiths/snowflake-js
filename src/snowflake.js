@@ -56,7 +56,6 @@ define(['Math', 'Snowflake/Branch'], function (Math, Branch) {
         this.canvas.setAttribute('height', this.height);
 
         this.context = this.canvas.getContext('2d');
-        this.context.translate(this.centre.x, this.centre.y);
     }
 
 
@@ -91,7 +90,9 @@ define(['Math', 'Snowflake/Branch'], function (Math, Branch) {
         var c = this.context;
         var proportion = getMaxBranchSize.call(this);
 
-        console.log('proportion:', proportion);
+        c.save();
+
+        c.translate(this.centre.x, this.centre.y);
 
         for (var branchI in this.branches) {
             if (!this.branches.hasOwnProperty(branchI)) {
@@ -147,16 +148,11 @@ define(['Math', 'Snowflake/Branch'], function (Math, Branch) {
                 c.lineTo(subBranchEndCoords.left.x, subBranchEndCoords.left.y);
                 c.moveTo(subBranchStartCoords.x, subBranchStartCoords.y);
                 c.lineTo(subBranchEndCoords.right.x, subBranchEndCoords.right.y);
-
-                //c.fillText(
-                //    subBranch.subBranchNumber + ':' + subBranch.angle,
-                //    subBranchStartCoords.x + 10,
-                //    subBranchStartCoords.y
-                //);
             }
             c.stroke();
         }
 
+        c.restore();
     }
 
     /**
