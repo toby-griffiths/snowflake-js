@@ -92,6 +92,8 @@ define(['Math', 'Snowflake/Branch'], function (Math, Branch) {
 
         c.save();
 
+        c.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
         c.translate(this.centre.x, this.centre.y);
 
         for (var branchI in this.branches) {
