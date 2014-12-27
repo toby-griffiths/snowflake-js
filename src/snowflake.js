@@ -83,9 +83,64 @@ define(['Math', 'Snowflake/Branch'], function (Math, Branch) {
     }
 
     /**
+     * Snowflake class
+     *
+     * Each time you call new Snowflake, a unique set of settings is created to build the snowflake from
+     *
+     * @name Snowflake
+     * @class Snowflake
+     *
+     * @property {int}               width       Width of the snowflake's canvas
+     * @property {int}               height      Height of the snowflake's canvas
+     * @property {object}            centre      Coordinates of the centre of the snowflake
+     *                                           Defaults to the centre of the canvas
+     * @property {int}               branchCount Number of branches
+     * @property {Array}             branches    Array of Snowflake.Branch objects making up the snowflake
+     * @property {HTMLCanvasElement} canvas      Canvas element the snowflake is drawn on
+     * @property {object}            context     2d canvas context object
+     * @property {HTMLElement}       domElement  DOM element that the snowflake's canvas is placed within
+     *
+     * @constructor
+     *
+     * @param {int} width         Width of the canvas
+     * @param {int} height        Height of the canvas
+     * @param {int} [domElement]  (optional) DOM element to attach the canvas to
+     *                            If not provided, a <div> element will be created to attach the canvas to.
+     *                            Either way, the element will be assigned to the domElement property of the Snowflake.
+     *                            You can attach the snowflake to any part of the document with something like this,
+     *                            assuming `snowflake` is a variable used to store the Snowflake object...
+     *                            `document.getElementById('blizzard').appendChild(snowflake.domElement);`
+     *
+     * @todo Update to check the existence of the random pattern in the register to allow each one to be unique
+     */
+    var Snowflake = function (width, height, domElement) {
+
+        this.height = height;
+        this.width = width;
+
+        this.centre = {
+            x: this.width / 2,
+            y: this.height / 2
+        };
+
+        // Prepare snowflake attributes
+        this.branchCount = Math.getRandomNumber(5, 10);
+        this.branches = generateBranchPatterns.call(this);
+
+        // Prepare canvas
+        prepareCanvas.call(this);
+
+        this.draw();
+
+        //Add to page
+        this.domElement = domElement || document.createElement('domElement');
+        this.domElement.appendChild(this.canvas);
+    };
+
+    /**
      * Draws the actual snowflake on the canvas
      */
-    function drawSnowflake() {
+    Snowflake.prototype.draw = function () {
 
         var c = this.context;
         var proportion = getMaxBranchSize.call(this);
@@ -156,68 +211,6 @@ define(['Math', 'Snowflake/Branch'], function (Math, Branch) {
 
         c.restore();
     }
-
-    /**
-     * Snowflake class
-     *
-     * Each time you call new Snowflake, a unique set of settings is created to build the snowflake from
-     *
-     * @name Snowflake
-     * @class Snowflake
-     *
-     * @property {int}               width       Width of the snowflake's canvas
-     * @property {int}               height      Height of the snowflake's canvas
-     * @property {object}            centre      Coordinates of the centre of the snowflake
-     *                                           Defaults to the centre of the canvas
-     * @property {int}               branchCount Number of branches
-     * @property {Array}             branches    Array of Snowflake.Branch objects making up the snowflake
-     * @property {HTMLCanvasElement} canvas      Canvas element the snowflake is drawn on
-     * @property {object}            context     2d canvas context object
-     * @property {HTMLElement}       domElement  DOM element that the snowflake's canvas is placed within
-     *
-     * @constructor
-     *
-     * @param {int} width         Width of the canvas
-     * @param {int} height        Height of the canvas
-     * @param {int} [domElement]  (optional) DOM element to attach the canvas to
-     *                            If not provided, a <div> element will be created to attach the canvas to.
-     *                            Either way, the element will be assigned to the domElement property of the Snowflake.
-     *                            You can attach the snowflake to any part of the document with something like this,
-     *                            assuming `snowflake` is a variable used to store the Snowflake object...
-     *                            `document.getElementById('blizzard').appendChild(snowflake.domElement);`
-     *
-     * @todo Update to check the existence of the random pattern in the register to allow each one to be unique
-     */
-    var Snowflake = function (width, height, domElement) {
-
-        this.height = height;
-        this.width = width;
-
-        this.centre = {
-            x: this.width / 2,
-            y: this.height / 2
-        };
-
-        // Prepare snowflake attributes
-        this.branchCount = Math.getRandomNumber(5, 10);
-        this.branches = generateBranchPatterns.call(this);
-
-        // Prepare canvas
-        prepareCanvas.call(this);
-
-        drawSnowflake.call(this);
-
-        //Add to page
-        this.domElement = domElement || document.createElement('domElement');
-        this.domElement.appendChild(this.canvas);
-    };
-
-
-    /**
-     * Pass-through method to re-draw the snowflake if parameters have been changed
-     * @type {drawSnowflake}
-     */
-    Snowflake.prototype.redraw = drawSnowflake;
 
     return Snowflake;
 });
