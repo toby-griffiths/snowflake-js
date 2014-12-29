@@ -56,6 +56,9 @@ define(['Math', 'Snowflake/Branch'], function (Math, Branch) {
         this.canvas.setAttribute('height', this.height);
 
         this.context = this.canvas.getContext('2d');
+
+        this.context.lineWidth = 3;
+        this.context.strokeStyle = '#ffffff';
     }
 
 
@@ -211,7 +214,7 @@ define(['Math', 'Snowflake/Branch'], function (Math, Branch) {
         }
 
         c.restore();
-    }
+    };
 
     return Snowflake;
 });
