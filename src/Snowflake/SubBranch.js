@@ -14,8 +14,6 @@ define(['jquery'], function ($) {
         var largestAngle = 80 * Math.PI / 180;
         var angleRange, angleInRadians;
 
-        console.log(this.parentBranch);
-
         $.each(this.parentBranch.subBranches, function () {
             var subBranch = this;
             if (subBranch.angle < largestAngle) {
@@ -24,16 +22,7 @@ define(['jquery'], function ($) {
         });
 
         angleRange = largestAngle - smallestAngle;
-
-
-        console.log('Min/Max angle:',
-            largestAngle - (angleRange / this.subBranchNumber),
-            largestAngle
-        );
-
-
         angleInRadians = (Math.random() * angleRange) + smallestAngle;
-        console.log(angleInRadians);
 
         return angleInRadians;
     }

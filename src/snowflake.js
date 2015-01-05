@@ -169,14 +169,10 @@ define(['Math', 'Snowflake/Branch'], function (Math, Branch) {
                 y: Math.round(-Math.cos(branchAngle) * proportionalLength)
             };
 
-            console.log('proportionalLength:', proportionalLength, 'branchAngle:', branchAngle, 'branchEndCoords:', branchEndCoords);
-
             c.beginPath();
             c.moveTo(0, 0);
             c.lineTo(branchEndCoords.x, branchEndCoords.y);
             c.stroke();
-
-            console.log('sub-branch count:', branch.subBranches.length);
 
             for (var subBranchI in branch.subBranches) {
                 if (!branch.subBranches.hasOwnProperty(subBranchI)) {
@@ -202,8 +198,6 @@ define(['Math', 'Snowflake/Branch'], function (Math, Branch) {
                     }
 
                 };
-
-                console.log('Sub-branch coords:', subBranchStartCoords, subBranchEndCoords);
 
                 c.moveTo(subBranchStartCoords.x, subBranchStartCoords.y);
                 c.lineTo(subBranchEndCoords.left.x, subBranchEndCoords.left.y);
